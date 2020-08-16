@@ -1,0 +1,5 @@
+package com.desafio.lojavirtual.resource;
+
+public class JwtAuthenticationController {
+
+}

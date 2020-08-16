@@ -1,0 +1,5 @@
+package com.desafio.lojavirtual.service;
+
+public class JwtUserDetailsService {
+
+}

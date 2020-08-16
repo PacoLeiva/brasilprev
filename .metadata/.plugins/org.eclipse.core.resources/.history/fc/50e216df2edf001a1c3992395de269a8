@@ -1,0 +1,53 @@
+package com.desafio.lojavirtual.resource;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.desafio.lojavirtual.model.ItemVendido;
+import com.desafio.lojavirtual.model.Pedido;
+import com.desafio.lojavirtual.repository.ItemVendidoRepository;
+import com.desafio.lojavirtual.repository.PedidoRepository;
+import com.desafio.lojavirtual.request.PedidoRequest;
+
+@RestController
+@RequestMapping(value="/pedido")
+public class PedidoResource {
+
+	@Autowired
+	PedidoRepository pedidoRepository;
+	ItemVendidoRepository itemVendidoRepository;
+	
+	@GetMapping("/listar")
+	public List<Pedido> listarPedido(){
+		return pedidoRepository.findAll();
+	}
+	
+	@GetMapping("/buscar/{id}")
+	public Pedido buscarPedido(@PathVariable(value="id") long id){
+		return pedidoRepository.findById(id);
+	}
+	
+	@PostMapping("/cadastrar")
+	public void salvarPedido(@RequestBody PedidoRequest pedido ) {
+		//TO DO: criar implementação da gravação no BD do pedido e dos itens.
+		pedidoRepository.save(pedido.getPedido());
+		for (ItemVendido itemVendido : pedido.getItensVendidos()) {
+			itemVendidoRepository.save(itemVendido);			
+		}
+	}
+	
+	@DeleteMapping("/excluir/{id}")
+	public void excluirPedido(@PathVariable(value="id") long id) {
+		//TO DO: criar implementação da deleção no BD dos itens.
+		pedidoRepository.deleteById(id);				
+	}
+	
+}

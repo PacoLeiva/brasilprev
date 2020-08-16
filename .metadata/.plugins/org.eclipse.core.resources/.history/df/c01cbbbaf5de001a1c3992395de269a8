@@ -1,0 +1,43 @@
+package com.desafio.lojavirtual.resource;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.desafio.lojavirtual.model.Cliente;
+import com.desafio.lojavirtual.repository.ClienteRepository;
+
+@RestController
+@RequestMapping(value="/cliente")
+public class ClienteResource {
+
+	@Autowired
+	ClienteRepository clienteRepository;
+	
+	@GetMapping("/listar")
+	public List<Cliente> listarClientes(){
+		return clienteRepository.findAll();
+	}
+	
+	@GetMapping("/buscar/{id}")
+	public Cliente buscarCliente(@PathVariable(value="id") long id){
+		return clienteRepository.findById(id);
+	}
+	
+	@PostMapping("/cadastrar")
+	public void salvarCliente(@RequestBody Cliente cliente) {
+		clienteRepository.save(cliente);				
+	}
+	
+	@DeleteMapping("/excluir")
+	public void excluirCliente(@RequestBody Cliente cliente) {
+		clienteRepository.save(cliente);				
+	}
+	
+}

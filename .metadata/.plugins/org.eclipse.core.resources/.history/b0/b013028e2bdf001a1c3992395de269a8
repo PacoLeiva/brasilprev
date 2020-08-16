@@ -1,0 +1,30 @@
+package com.desafio.lojavirtual.request;
+
+import java.util.ArrayList;
+
+import com.desafio.lojavirtual.model.ItemVendido;
+import com.desafio.lojavirtual.model.Pedido;
+
+public class PedidoRequest {
+	
+	private Pedido pedido;
+	
+	private ArrayList<ItemVendido> itensVenddidos;
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public ArrayList<ItemVendido> getItensVenddidos() {
+		return itensVenddidos;
+	}
+
+	public void setItensVenddidos(ArrayList<ItemVendido> itensVenddidos) {
+		this.itensVenddidos = itensVenddidos;
+	}
+	
+}

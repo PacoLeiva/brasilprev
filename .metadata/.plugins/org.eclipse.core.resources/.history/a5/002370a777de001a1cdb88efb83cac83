@@ -1,0 +1,5 @@
+package com.brasilprev.apibrasilprev.models;
+
+public class Cliente {
+
+}

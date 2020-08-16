@@ -18,6 +18,7 @@ import com.desafio.lojavirtual.repository.ClienteRepository;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 
 @RestController
 @RequestMapping(value="/cliente")
@@ -29,31 +30,31 @@ public class ClienteResource {
 	ClienteRepository clienteRepository;
 	
 	@GetMapping("/listar")
-	@ApiOperation(value="Metodo retorna uma lista com todos os Clientes salvos no Banco de Dados")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public List<Cliente> listarClientes(){
 		return clienteRepository.findAll();
 	}
 	
 	@GetMapping("/buscar/{id}")
-	@ApiOperation(value="Metodo retorna um cliente, de acordo com o id fornecido na busca")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public Cliente buscarCliente(@PathVariable(value="id") long id){
 		return clienteRepository.findById(id);
 	}
 	
 	@PostMapping("/cadastrar")
-	@ApiOperation(value="Metodo insere um novo cliente no banco de dados")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public void salvarCliente(@RequestBody Cliente cliente) {
 		clienteRepository.save(cliente);				
 	}
 	
 	@DeleteMapping("/excluir/{id}")
-	@ApiOperation(value="Metodo deleta um cliente no banco de dados, de acordo com o id fornecido")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public void excluirCliente(@PathVariable(value="id") long id) {
 		clienteRepository.deleteById(id);				
 	}
 	
 	@PutMapping("/atualizar")
-	@ApiOperation(value="Metodo atualiza um cliente no banco de dados")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public Cliente atualizarCliente(@RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);				
 	}

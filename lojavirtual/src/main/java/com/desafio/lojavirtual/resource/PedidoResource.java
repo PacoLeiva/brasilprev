@@ -18,6 +18,7 @@ import com.desafio.lojavirtual.repository.PedidoRepository;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 
 @RestController
 @RequestMapping(value="/pedido")
@@ -29,31 +30,31 @@ public class PedidoResource {
 	PedidoRepository pedidoRepository;
 	
 	@GetMapping("/listar")
-	@ApiOperation(value="Metodo retorna uma lista com todos os Pedidos salvos no Banco de Dados")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public List<Pedido> listarPedidos(){
 		return pedidoRepository.findAll();
 	}
 	
 	@GetMapping("/buscar/{id}")
-	@ApiOperation(value="Metodo retorna um pedido, de acordo com o id fornecido na busca")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public Pedido buscarPedido(@PathVariable(value="id") long id){
 		return pedidoRepository.findById(id);
 	}
 	
 	@PostMapping("/cadastrar")
-	@ApiOperation(value="Metodo insere um novo pedido no banco de dados")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public void salvarPedido(@RequestBody Pedido pedido) {
 		pedidoRepository.save(pedido);				
 	}
 	
 	@DeleteMapping("/excluir/{id}")
-	@ApiOperation(value="Metodo deleta um pedido no banco de dados, de acordo com o id fornecido")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public void excluirPedido(@PathVariable(value="id") long id) {
 		pedidoRepository.deleteById(id);				
 	}
 	
 	@PutMapping("/atualizar")
-	@ApiOperation(value="Metodo atualiza um pedido no banco de dados")
+	@ApiOperation(value = "", authorizations = { @Authorization(value="token") })
 	public Pedido atualizarPedido(@RequestBody Pedido pedido) {
 		return pedidoRepository.save(pedido);				
 	}
